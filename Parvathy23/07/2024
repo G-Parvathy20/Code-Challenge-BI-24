@@ -1,0 +1,41 @@
+import java.lang.System;
+import java.util.Scanner;
+
+public class SimpleCalculator {
+  public static void main(String[] args) {
+    
+    System.out.println("1.Addition");
+    System.out.println("2.Subtraction");
+    System.out.println("3.Multiplication");
+    System.out.println("4.Division");
+    System.out.println("5.Modular Division");
+
+    Scanner scanning=new Scanner(System.in);
+    System.out.println("Enter your choice:");
+    int choice=scanning.nextInt();
+    int num1=scanning.nextInt();
+    int num2=scanning.nextInt();
+   
+    switch (choice) {
+      case 1:
+        System.out.println("the addition of num1 and num2 is:"+(num1+num2));
+        break;
+      case 2:
+        System.out.println("the Subtraction of num1 and num2 is:"+(num1-num2));
+        break;
+      case 3:
+        System.out.println("the Multiplication of num1 and num2 is:"+(num1*num2));
+        break;
+      case 4:
+        System.out.println("the division of num1 and num2 is:"+(num1/num2));
+        break;
+      case 5:
+        System.out.println("the modular Division of num1 and num2 is:"+(num1%num2));
+        break;
+     default:
+        System.out.println("Invaid Choice");
+        break;
+    }
+    scanning.close();
+  }
+}
