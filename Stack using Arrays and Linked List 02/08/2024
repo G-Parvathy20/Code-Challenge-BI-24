@@ -1,0 +1,177 @@
+//using Arrays
+
+import java.util.Scanner;
+
+class StackArray {
+    private int maxSize;
+    private int top;
+    private int[] stackArray;
+
+    public StackArray(int size) {
+        maxSize = size;
+        stackArray = new int[maxSize];
+        top = -1;
+    }
+
+    public void push(int value) {
+        if (isFull()) {
+            System.out.println("Stack is full. Unable to push " + value);
+            return;
+        }
+        stackArray[++top] = value;
+        System.out.println(value + " pushed to stack.");
+    }
+
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Unable to pop.");
+            return -1;
+        }
+        return stackArray[top--];
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Nothing to peek.");
+            return -1;
+        }
+        return stackArray[top];
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public boolean isFull() {
+        return top == maxSize - 1;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the size of the stack: ");
+        int size = scanner.nextInt();
+        StackArray stack = new StackArray(size);
+
+        while (true) {
+            System.out.println("\nChoose an operation: 1. Push 2. Pop 3. Peek 4. Exit");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter push value: ");
+                    int value = scanner.nextInt();
+                    stack.push(value);
+                    break;
+                case 2:
+                    int poppedValue = stack.pop();
+                    if (poppedValue != -1) {
+                        System.out.println("Popped value: " + poppedValue);
+                    }
+                    break;
+                case 3:
+                    int peekedValue = stack.peek();
+                    if (peekedValue != -1) {
+                        System.out.println("Top value: " + peekedValue);
+                    }
+                    break;
+                case 4:
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
+
+
+
+
+
+//using Linked List
+
+
+import java.util.Scanner;
+
+class StackListDemo {
+    private Node top;
+
+    private class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            next = null;
+        }
+    }
+
+    public StackListDemo() {
+        top = null;
+    }
+
+    public void push(int value) {
+        Node newNode = new Node(value);
+        newNode.next = top;
+        top = newNode;
+        System.out.println(value + " pushed to stack.");
+    }
+
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Unable to pop.");
+            return -1;
+        }
+        int value = top.data;
+        top = top.next;
+        return value;
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Nothing to peek.");
+            return -1;
+        }
+        return top.data;
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        StackListDemo stack = new StackListDemo();
+
+        while (true) {
+            System.out.println("\nChoose an operation: 1. Push 2. Pop 3. Peek 4. Exit");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter value to push: ");
+                    int value = scanner.nextInt();
+                    stack.push(value);
+                    break;
+                case 2:
+                    int poppedValue = stack.pop();
+                    if (poppedValue != -1) {
+                        System.out.println("Popped value: " + poppedValue);
+                    }
+                    break;
+                case 3:
+                    int peekedValue = stack.peek();
+                    if (peekedValue != -1) {
+                        System.out.println("Top element: " + peekedValue);
+                    }
+                    break;
+                case 4:
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}
+
