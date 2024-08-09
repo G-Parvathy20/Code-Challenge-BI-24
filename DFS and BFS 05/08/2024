@@ -1,0 +1,90 @@
+import java.util.*;
+
+class Graph {
+    private int vertices;   
+    private List<Integer>[] adjacencyList; 
+
+    // Constructor to initialize the graph
+    public Graph(int v) {
+        vertices = v;
+        adjacencyList = new ArrayList[v];
+        for (int i = 0; i < v; i++) {
+            adjacencyList[i] = new ArrayList<>();
+        }
+    }
+
+    // Add an edge to the graph
+    void addEdge(int v, int w) {
+        adjacencyList[v].add(w);  
+    }
+
+    // DFS utility function
+    void DFSUtil(int v, boolean[] visited) {
+        visited[v] = true;
+        System.out.print(v + " ");
+
+        for (int n : adjacencyList[v]) {
+            if (!visited[n]) {
+                DFSUtil(n, visited);
+            }
+        }
+    }
+
+    // Perform DFS starting from vertex v
+    void DFS(int v) {
+        boolean[] visited = new boolean[vertices];
+        DFSUtil(v, visited);
+    }
+
+    // Perform BFS starting from vertex s
+    void BFS(int s) {
+        boolean[] visited = new boolean[vertices];
+        Queue<Integer> queue = new LinkedList<>();
+
+        visited[s] = true;
+        queue.add(s);
+
+        while (!queue.isEmpty()) {
+            s = queue.poll();
+            System.out.print(s + " ");
+
+            for (int n : adjacencyList[s]) {
+                if (!visited[n]) {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of vertices: ");
+        int v = sc.nextInt();
+
+        Graph graph = new Graph(v);
+
+        System.out.print("Enter number of edges: ");
+        int e = sc.nextInt();
+
+        System.out.println("Enter the edges (format: startVertex endVertex):");
+        for (int i = 0; i < e; i++) {
+            int start = sc.nextInt();
+            int end = sc.nextInt();
+            graph.addEdge(start, end);
+        }
+
+        System.out.print("Enter starting vertex for DFS: ");
+        int dfsStart = sc.nextInt();
+        System.out.println("DFS traversal starting from vertex " + dfsStart + ":");
+        graph.DFS(dfsStart);
+
+        System.out.print("\nEnter starting vertex for BFS: ");
+        int bfsStart = sc.nextInt();
+        System.out.println("BFS traversal starting from vertex " + bfsStart + ":");
+        graph.BFS(bfsStart);
+
+        sc.close();
+    }
+}
